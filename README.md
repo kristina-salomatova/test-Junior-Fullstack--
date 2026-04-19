@@ -97,10 +97,34 @@ POST /api/users
 "captcha": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
-* #### Пример ответа (для успешного сценария:
+* #### Пример ответа для успешного сценария:
+```json
+HTTP/1.1 201 Created
+{
+  "userName": "ivan",
+  "message": "User registered successfully"
+} 
+```
+* #### Пример ответа для сценария с ошибкой (неверный пароль):
+```json
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
 
+{
+  "error": "Validation failed",
+  "message": "Password must contain at least one digit (0-9), one uppercase letter (A-Z), one lowercase letter (a-z), one special character, and be at least 8 characters long"
+}
+```  
+* #### Пример ответа для сценария с ошибкой (Пользователь с таким логином уже существует):
+```json
+HTTP/1.1 409 Conflict
+Content-Type: application/json
 
-
+{
+  "error": "Conflict",
+  "message": "User exists"
+}
+```  
 ### Задание 3.2
 Описать подробный пошаговый алгоритм, создания Пользователя на стороне бэк сервиса при вызове, получившегося в Задачи 3.1 метода. Алгоритм должен подробно описывать какие проверки требуется выполнять  бэк сервису после получения запроса на создание нового Пользователя (при нажатии кнопки “Register”),  прежде чем создать Пользователя в БД. Описание может быть в виде текста или диаграммы (например, activity)/блок-схемы.
 
